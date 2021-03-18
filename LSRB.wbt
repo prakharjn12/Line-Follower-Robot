@@ -1,0 +1,166 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation -0.9990704373454788 -0.035947862205273164 -0.023791015640034288 1.170135662412914
+  position 0.5495194785572025 4.8217144288188445 0.7476163587037193
+  follow "robot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 0 0.15
+  floorSize 2 2
+  floorTileSize 2 2
+  floorAppearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "C:/Users/prakhar/Documents/robotics/protos/Robotics (1).jpg"
+      ]
+    }
+    roughness 1
+    roughnessMap ImageTexture {
+      url [
+        "textures/parquetry/chequered_parquetry_roughness.jpg"
+      ]
+    }
+    metalness 0
+    normalMap ImageTexture {
+      url [
+        "textures/parquetry/chequered_parquetry_normal.jpg"
+      ]
+    }
+    occlusionMap ImageTexture {
+      url [
+        "textures/parquetry/chequered_parquetry_occlusion.jpg"
+      ]
+    }
+  }
+}
+Robot {
+  translation -0.4383190798347499 -0.00032950624910155907 -0.7098954510835322
+  rotation -0.008565285534710972 0.999924588355002 0.008800766261463831 1.5971697995773428
+  children [
+    DEF front DistanceSensor {
+      translation 0 0.02 0.05
+      rotation 0.35740699927911007 0.35740699927911007 0.8628559982596194 -1.7177753071795863
+      children [
+        DEF front Shape {
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "front"
+      type "infra-red"
+    }
+    DEF right DistanceSensor {
+      translation -0.0370711 0.0150001 0.0267156
+      rotation -0.2817470461060766 -0.3671800600866351 -0.8864521450621435 1.94697
+      children [
+        DEF sensor Shape {
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "right"
+      type "infra-red"
+    }
+    DEF left DistanceSensor {
+      translation 0.04 0.0129289 0.0287867
+      rotation 0.552482250087777 0.31897614438841215 0.770076348584379 -1.286665307179586
+      children [
+        DEF sensor Shape {
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "left"
+      type "infra-red"
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 9249.110874569358
+        anchor 0.05 0.03 0
+      }
+      device [
+        RotationalMotor {
+          name "motor_1"
+        }
+      ]
+      endPoint DEF wheel Solid {
+        translation 0.05 0.03 0
+        rotation 0.12967624398622143 -0.12957302041286614 0.9830538663403511 1.5870906412634238
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 0.666667 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.03
+            }
+          }
+        ]
+        name "wheel"
+        boundingObject USE wheel
+        physics DEF wheel_p Physics {
+        }
+        linearVelocity 0.18834035142663083 4.937059939838306e-07 -0.00495180722109932
+        angularVelocity -0.16514123325938818 -9.296156478083369e-05 -6.27782439956579
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 11598.761178426852
+        anchor -0.05 0.03 0
+      }
+      device [
+        RotationalMotor {
+          name "motor_2"
+        }
+      ]
+      endPoint Solid {
+        translation -0.05 0.03 0
+        rotation 0.0005511252573671164 -0.0005506865562087329 0.9999996965025877 1.5700003034973586
+        children [
+          USE wheel
+        ]
+        name "solid(1)"
+        boundingObject USE wheel
+        physics USE wheel_p
+        linearVelocity 0.18833236608237414 -4.786578053484532e-07 -0.0049563999918468635
+        angularVelocity -0.16514209548987008 -9.517554710126083e-05 -6.277824168877087
+      }
+    }
+    DEF body Transform {
+      translation 0 0.0512 0
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.262745 0.0784314 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.1
+            radius 0.05
+          }
+        }
+      ]
+    }
+  ]
+  boundingObject USE body
+  physics Physics {
+  }
+  controller "i_am__controller"
+  linearVelocity 0.18833627809710315 -7.928176513846793e-09 -0.004953937736174592
+  angularVelocity 1.0127989544861663e-05 -0.00013733848707735429 3.745417901279916e-06
+}
