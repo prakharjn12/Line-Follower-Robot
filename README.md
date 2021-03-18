@@ -17,3 +17,6 @@ R- Right
 S- Straight
 B- Turning around (Back).
 
+
+Link to Youtube Video
+https://youtu.be/7GbOAUPPNms
